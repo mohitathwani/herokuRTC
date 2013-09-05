@@ -16,7 +16,7 @@
         var connectFailure = function(errmesg) {
             console.log(errmesg);
         }
-              // easyRTC.enableAudio(false);
+              easyRTC.enableAudio(true);
 
         easyRTC.initMediaSource(
               function(){      // success callback    
