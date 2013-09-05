@@ -25,12 +25,12 @@ POSSIBILITY OF SUCH DAMAGE.
 */
 
 var express = require("express");
-var app = express();
-app.use(express.logger());
-var port = process.env.PORT || 5000;
-app.listen(port, function() {
-  console.log("Listening on " + port);
-});
+// var app = express();
+// app.use(express.logger());
+var port = process.env.PORT || 3000;
+// app.listen(port, function() {
+//   console.log("Listening on " + port);
+// });
 // Local includes
 easyrtcCfg  = require('./config');          // All server configuration (global)
 var g       = require('./lib/general');     // General helper functions
@@ -108,7 +108,7 @@ if (easyrtcCfg.sslEnable) {  // Start SSL Server (https://)
         forwardingServer.listen(easyrtcCfg.httpPort);
     }    
 } else {    // Start HTTP server (http://)
-    var server = http.createServer(httpApp).listen(easyrtcCfg.httpPort);
+    var server = http.createServer(httpApp).listen(port); //easyrtcCfg.httpPort
     logServer.info('HTTP Server started on port: ' + easyrtcCfg.httpPort, { label: 'easyrtcServer'});
 }
 
