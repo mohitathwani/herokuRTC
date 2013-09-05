@@ -1,10 +1,31 @@
+     easyRTC.setStreamAcceptor( function(callerEasyrtcid, stream) {  
+        var video = document.getElementById('caller');
+        easyRTC.setVideoObjectSrc(video, stream);
+    });
+
+     easyRTC.setOnStreamClosed( function (callerEasyrtcid) {
+        easyRTC.setVideoObjectSrc(document.getElementById('caller'), "");
+    });
+
+
     function my_init() {
-         easyRTC.setLoggedInListener( loggedInListener);
-         easyRTC.initManaged("Company Chat Line", "self", ["caller"],
-             function(myId) {
-                console.log("My easyrtcid is " + myId);
-             }
-         );
+        easyRTC.setLoggedInListener( loggedInListener);
+        var connectSuccess = function(myId) {
+            console.log("My easyrtcid is " + myId);
+        }
+        var connectFailure = function(errmesg) {
+            console.log(errmesg);
+        }
+              easyRTC.enableAudio(false);
+
+        easyRTC.initMediaSource(
+              function(){      // success callback    
+                  var selfVideo = document.getElementById("self");    
+                  easyRTC.setVideoObjectSrc(selfVideo, easyRTC.getLocalStream());
+                  easyRTC.connect("Company Chat Line", connectSuccess, connectFailure);
+              },
+              connectFailure
+        );
      }
 
 
